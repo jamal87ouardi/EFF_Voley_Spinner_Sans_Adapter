@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import org.json.JSONArray
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
+    var sa = JSONArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,13 +23,14 @@ class MainActivity : AppCompatActivity() {
         val request = JsonArrayRequest(
             Request.Method.GET, url, null,
             { response ->
+                sa = response
                 // Gérez la réponse du tableau JSON
                 val moviesList = mutableListOf<Movie>()
 
 
 
-                for (i in 0 until response.length()) {
-                    val jsonObject: JSONObject = response.getJSONObject(i)
+                for (i in 0 until sa.length()) {
+                    val jsonObject: JSONObject = sa.getJSONObject(i)
                     val id = jsonObject.getInt("id")
                     val name = jsonObject.getString("name")
                     val price = jsonObject.getDouble("price")
@@ -35,11 +38,12 @@ class MainActivity : AppCompatActivity() {
 
                     val movie = Movie(id, name, price, image)
                     moviesList.add(movie)
+
                 }
 
                 // Mettez à jour l'adaptateur de RecyclerView avec les données analysées
-                val adapter = MovieAdapter()
-                adapter.updateMovies(moviesList)
+                val adapter = MovieAdapter(moviesList)
+
                 val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
                 recyclerView.adapter = adapter
 

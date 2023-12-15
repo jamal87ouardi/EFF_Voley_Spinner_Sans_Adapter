@@ -8,13 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-    var movies: List<Movie> = emptyList()
-
-    fun updateMovies(newMovies: List<Movie>) {
-        movies = newMovies
-        notifyDataSetChanged()
-    }
+class MovieAdapter(val movies:List<Movie>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
@@ -37,9 +31,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
         fun bind(movie: Movie) {
             nameTextView.text = movie.name
-            priceTextView.text = "Price: $${movie.price}"
-            // Load image using Picasso, Glide, or your preferred image loading library
-            // For example, using Picasso:
+            priceTextView.text = "Price: ${movie.price} MAD"
             Picasso.get().load(movie.image).into(imageView)
         }
     }
