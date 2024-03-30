@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             Request.Method.GET, url, null,
             { response ->
                 sa = response
-                // Gérez la réponse du tableau JSON
+
                 val moviesList = mutableListOf<Movie>()
 
 
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-                // Mettez à jour l'adaptateur de RecyclerView avec les données analysées
+
                 val adapter = MovieAdapter(moviesList)
 
                 val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.layoutManager = LinearLayoutManager(this)
             },
             { error ->
-                // Gérez les erreurs
+
             }
         )
 
-// Ajoutez la requête à la RequestQueue
+
         val requestQueue = Volley.newRequestQueue(this)
         requestQueue.add(request)
 
