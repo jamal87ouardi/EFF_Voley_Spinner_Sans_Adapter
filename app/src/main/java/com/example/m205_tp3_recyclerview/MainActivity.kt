@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val url = "https://run.mocky.io/v3/d9293f76-e064-4731-ba9f-dcef017cca1a"
+        val url = "https://mocki.io/v1/c815b063-5d3a-4c5b-ad6f-8f457c52d6e1"
 
         val request = JsonArrayRequest(
             Request.Method.GET, url, null,
