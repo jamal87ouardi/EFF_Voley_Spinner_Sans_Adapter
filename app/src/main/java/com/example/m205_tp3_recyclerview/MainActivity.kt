@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -44,9 +45,9 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-                val listView= findViewById<ListView>(R.id.listView)
-                val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, moviesList)
-                listView.adapter = adapter
+                val sp= findViewById<Spinner>(R.id.spinner)
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, moviesList)
+                sp.adapter = adapter
             },
             { error ->
 
