@@ -2,6 +2,8 @@ package com.example.m205_tp3_recyclerview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -25,29 +27,26 @@ class MainActivity : AppCompatActivity() {
             { response ->
                 sa = response
 
-                val moviesList = mutableListOf<Movie>()
+                val moviesList = ArrayList<String>()
 
 
 
                 for (i in 0 until sa.length()) {
                     val jsonObject: JSONObject = sa.getJSONObject(i)
-                    val id = jsonObject.getInt("id")
+
                     val name = jsonObject.getString("name")
                     val price = jsonObject.getDouble("price")
-                    val image = jsonObject.getString("image")
 
-                    val movie = Movie(id, name, price, image)
-                    moviesList.add(movie)
+                    val displayed = name+" - "+price.toString()+" MAD"
+
+
+                    moviesList.add(displayed)
 
                 }
 
-
-                val adapter = MovieAdapter(moviesList)
-
-                val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-                recyclerView.adapter = adapter
-
-                recyclerView.layoutManager = LinearLayoutManager(this)
+                val listView= findViewById<ListView>(R.id.listView)
+                val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, moviesList)
+                listView.adapter = adapter
             },
             { error ->
 
